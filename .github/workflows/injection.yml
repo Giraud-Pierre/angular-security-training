@@ -1,14 +1,13 @@
-name: injection_corrected
+name: test-action
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [pull_request]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - name: injection_corrected
-        env :
-          title: "${{ github.event.pull_request.title }}"    #le titre est mis en tant que variable d'environement!
+      - name: Check PR title
         run: |
+          title="${{ github.event.pull_request.title }}"
           if [[ $title =~ ^test ]]; then
           echo $title
           exit 0
